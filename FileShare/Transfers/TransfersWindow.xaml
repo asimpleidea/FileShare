@@ -1,0 +1,74 @@
+﻿<Window x:Name="window" x:Class="FileShare.TransfersWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FileShare"
+        mc:Ignorable="d"
+        Title="Transfers"  MinHeight="400" MinWidth="300" MaxHeight="600" Closing="Window_Closing" SizeToContent="WidthAndHeight" >
+
+    <Window.Resources>
+        <Style TargetType="WrapPanel" x:Key="SenderToReceiver">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Style.Resources>
+                <Style TargetType="Image">
+                    <Setter Property="Height" Value="20" />
+                    <Setter Property="Width" Value="20" />
+                    <Setter Property="Margin" Value="5,0" />
+                </Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="FontFamily" Value="Calibri Light" />
+                    <Setter Property="FontSize" Value="20" />
+                    <Setter Property="Margin" Value="5,0" />
+                </Style>
+            </Style.Resources>
+        </Style>
+    </Window.Resources>
+    
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition ></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <ListView ItemsSource="{Binding Progresses}" Grid.Row="0">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="25"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <WrapPanel Grid.Row="0" Style="{StaticResource SenderToReceiver}">
+                            <Image Source="{Binding FromOrTo}"/>
+                            <Button Visibility="{Binding Visibility}" Background="Transparent" BorderBrush="Transparent" Command="{Binding AbortTransfer}">
+                                <StackPanel>
+                                    <Image Source="/FileShare;component/Assets/cancel.png" />
+                                </StackPanel>
+                            </Button>
+                            <Image Source="{Binding UserPicture}" />
+                            <TextBlock Text="{Binding UserName}" />  
+                        </WrapPanel>
+
+                        <TextBlock Grid.Row="1"  x:Name="FileName" MaxWidth="300" Text="{Binding FileName}" Padding="0,5" HorizontalAlignment="Left" TextWrapping="WrapWithOverflow" />
+
+                        <WrapPanel Grid.Row="2">
+                            <TextBlock Margin="0,0,10,0" Text="{Binding EstimatedText}" Visibility="{Binding Visibility}" Padding="0,5"/>
+                            <TextBlock MaxWidth="300" Text="{Binding CurrentActivity}" FontWeight="{Binding TextWeight}" Foreground="{Binding TextColor}" Padding="0,5" HorizontalAlignment="Left" TextWrapping="WrapWithOverflow" />
+                        </WrapPanel>
+                        
+                        <ProgressBar Grid.Row="3" MinWidth="300" x:Name="CompletionBar" Value="{Binding Completion}" Minimum="{Binding Minimum}" Maximum="{Binding Maximum}" />
+
+                    </Grid>                        
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+
+
+    </Grid>
+</Window>

@@ -1,0 +1,19 @@
+﻿<Window x:Class="FileShare.SendToWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FileShare"
+        mc:Ignorable="d"
+        Title="Send file..." Height="Auto" Width="Auto" SizeToContent="WidthAndHeight">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="450"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ContentControl Grid.Row="0" Height="450" Width="450" Content="{Binding Content}" />
+        
+        <!-- The Button -->
+        <Button Grid.Row="1" Content="Send" Command="{Binding Button}" HorizontalAlignment="Center" Margin="10" Padding="10,5"/>
+    </Grid>
+</Window>
